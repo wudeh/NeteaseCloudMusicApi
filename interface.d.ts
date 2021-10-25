@@ -694,6 +694,14 @@ export function login_cellphone(
   } & RequestBaseConfig,
 ): Promise<Response>
 
+export function login_cellphone(
+  params: {
+    phone: number | string
+    countrycode?: number | string
+    captcha: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
 export function login_refresh(params: RequestBaseConfig): Promise<Response>
 
 export function login_status(params: RequestBaseConfig): Promise<Response>
@@ -1367,7 +1375,14 @@ export function artist_detail(
   } & RequestBaseConfig,
 ): Promise<Response>
 
-export function cloud(params: RequestBaseConfig): Promise<Response>
+export function cloud(
+  params: {
+    songFile: {
+      name: string
+      data: Buffer
+    }
+  } & RequestBaseConfig,
+): Promise<Response>
 
 export function topic_detail(
   params: {
@@ -1505,7 +1520,7 @@ export function musician_play_trend(
   } & RequestBaseConfig,
 ): Promise<Response>
 
-export function musician_tasksss(params: RequestBaseConfig): Promise<Response>
+export function musician_tasks(params: RequestBaseConfig): Promise<Response>
 
 export function musician_cloudbean(params: RequestBaseConfig): Promise<Response>
 
@@ -1515,3 +1530,7 @@ export function musician_cloudbean_obtain(
     period: number | string
   } & RequestBaseConfig,
 ): Promise<Response>
+
+export function vip_info(params: RequestBaseConfig): Promise<Response>
+
+export function musician_sign(params: RequestBaseConfig): Promise<Response>

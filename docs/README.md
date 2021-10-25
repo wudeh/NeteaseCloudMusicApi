@@ -232,13 +232,15 @@
 214. vip任务
 215. 领取vip成长值
 216. 歌手粉丝
-216. 数字专辑详情
-217. 数字专辑销量
-218. 音乐人数据概况
-219. 音乐人播放趋势
-220. 音乐人任务
-221. 账号云豆数
-222. 领取云豆
+217. 数字专辑详情
+218. 数字专辑销量
+219. 音乐人数据概况
+220. 音乐人播放趋势
+221. 音乐人任务
+222. 账号云豆数
+223. 领取云豆
+224. 获取 VIP 信息
+225. 音乐人签到
 
 ## 安装
 
@@ -424,11 +426,13 @@ $ sudo docker run -d -p 3000:3000 netease-music-api
 **可选参数 :**   
 `countrycode`: 国家码，用于国外手机号登录，例如美国传入：`1`
 
-`md5_password`: md5加密后的密码,传入后 `password` 将失效  
+`md5_password`: md5加密后的密码,传入后 `password` 参数将失效  
+
+`captcha`: 验证码,使用 [`/captcha/sent`](#发送验证码)接口传入手机号获取验证码,调用此接口传入验证码,可使用验证码登录,传入后 `password` 参数将失效
 
 **接口地址 :** `/login/cellphone`
 
-**调用例子 :** `/login/cellphone?phone=xxx&password=yyy` `/login/cellphone?phone=xxx&md5_password=yyy`
+**调用例子 :** `/login/cellphone?phone=xxx&password=yyy` `/login/cellphone?phone=xxx&md5_password=yyy` `/login/cellphone?phone=xxx&captcha=1234`
 
 #### 2. 邮箱登录
 
@@ -464,7 +468,7 @@ v3.30.0后支持手动传入cookie,登录接口返回内容新增 `cookie` 字�
 
 **接口地址 :** `/login/qr/key`
 ##### 2. 二维码生成接口
-说明: 调用此接口传入上一个接口生成的key可生成二维码图片的base64和二维码信息,可使用base64展示图片,或者使用二维码信息内容自行使用第三方二维码生产库渲染二维码  
+说明: 调用此接口传入上一个接口生成的key可生成二维码图片的base64和二维码信息,可使用base64展示图片,或者使用二维码信息内容自行使用第三方二维码生成库渲染二维码  
 
 必选参数: `key`,由第一个接口生成  
 
@@ -3440,7 +3444,7 @@ type='1009' 获取其 id, 如`/search?keywords= 代码时间 &type=1009`
 
 ### 音乐人任务
 
-说明 : 音乐人登录后调用此接口 , 可获取音乐人任务
+说明 : 音乐人登录后调用此接口 , 可获取音乐人任务。返回的数据中`status`字段为任务状态，0表示任务未开始，10表示任务正在进行中，20表示任务完成，但未领取云豆，100表示任务完成，并且已经领取了相应的云豆
 
 **接口地址 :** `/musician/tasks`
 
@@ -3466,7 +3470,42 @@ type='1009' 获取其 id, 如`/search?keywords= 代码时间 &type=1009`
 
 **调用例子 :** `/musician/cloudbean/obtain?id=7036416928&period=1`
 
+### 获取 VIP 信息
 
+说明: 登录后调用此接口，可获取当前 VIP 信息。
+
+**接口地址 :** `/vip/info`
+
+**调用例子 :** `/vip/info`
+
+### 音乐人签到
+
+说明: 音乐人登录后调用此接口，可以完成“登录音乐人中心”任务，然后通过`/musician/cloudbean/obtain`接口可以领取相应的云豆。
+
+**接口地址 :** `/musician/sign`
+
+**调用例子 :** `/musician/sign`
+
+### 歌曲相关视频
+
+说明： 可以调用此接口获取歌曲相关视频 (区别于 MV)， 有些歌曲没有 MV 但是有用户上传的与此歌曲相关的 Mlog。 此功能仅在 网易云音乐 APP上存在。
+
+请注意：此接口偶尔会在相关视频后返回不相关视频，请合理使用。 
+
+**必选参数 :** `songid` : 歌曲ID
+
+**可选参数 :** `mvid` : 如果定义，此 mvid 对应的 MV 将会作为第一个返回。
+`limit` : 取出的 Mlog 数量, 不包含第一个 mvid
+
+**接口地址 :** `/mlog/music/rcmd`
+
+### 公开隐私歌单
+
+说明: 可以调用此接口将当前用户的隐私歌单公开。
+
+**必选参数 :** `id` : 歌单ID
+
+**接口地址 :** `/playlist/privacy`
 
 ## 离线访问此文档
 
@@ -3474,9 +3513,7 @@ type='1009' 获取其 id, 如`/search?keywords= 代码时间 &type=1009`
 
 ## 关于此文档
 
-此文档由 [docsify](https://github.com/QingWei-Li/docsify/) 生成 docsify 是一个动
-态生成文档网站的工具。不同于 GitBook、Hexo 的地方是它不会生成将 .md 转成 .html
-文件，所有转换工作都是在运行时进行。
+此文档由 [docsify](https://github.com/QingWei-Li/docsify/) 生成 docsify 是一个动态生成文档网站的工具。不同于 GitBook、Hexo 的地方是它不会生成将 .md 转成 .html 文件，所有转换工作都是在运行时进行。
 
 ## License
 
