@@ -1542,15 +1542,84 @@ export function song_download_url(
   } & RequestBaseConfig,
 ): Promise<Response>
 
-export function send_event_text(
-  params: {
-    msg: number | string
-  } & RequestBaseConfig,
-): Promise<Response>
-
 export function playlist_track_all(
   params: {
     id: number | string
     s?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function artist_video(
+  params: {
+    id: number | string
+    size?: number | string
+    cursor?: number | string
+    order?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function sign_happy_info(params: RequestBaseConfig): Promise<Response>
+
+export function record_recent_song(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_video(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_voice(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_playlist(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_album(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function record_recent_dj(
+  params: {
+    limit?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function signin_progress(
+  params: {
+    moduleId?: string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function nickname_check(
+  params: {
+    nickname: string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function musician_tasks_new(params: RequestBaseConfig): Promise<Response>
+
+export function playlist_update_playcount(
+  params: {
+    id?: number | string
+  } & RequestBaseConfig,
+): Promise<Response>
+
+export function vip_timemachine(
+  params: {
+    startTime?: number | string
+    endTime?: number | string
+    limit?: number | string
   } & RequestBaseConfig,
 ): Promise<Response>
